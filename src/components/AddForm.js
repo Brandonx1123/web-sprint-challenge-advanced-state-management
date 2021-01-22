@@ -1,15 +1,74 @@
 import React from 'react';
+import {connect} from 'react-redux'
+import {postSmurf} from "../actions/index"
 
 class AddForm extends React.Component {
 
+    state = {
+        name:'',
+        position:'',
+        nickname:'',
+        description:''
+    }
+handleChange = e => {
+        this.setState({
+            [e.target.name]:e.target.value
+        // name:e.target.value,
+        // position:e.target.value,
+        // nickname:e.target.value,
+        // description:e.target.value
+    })
+}
+handleSubmit = e => {
+    e.preventDefault()
+   this.props.postSmurf(this.state.name)
+}
     render() {
         return(<section>
             <h2>Add Smurf</h2>
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
-                    <input onChange={this.handleChange} name="name" id="name" />
+                    <input onChange={this.handleChange} 
+                    name="name" 
+                    id="name" 
+                    value={this.state.name}
+                    placeholder=""
+                    />
+                <label htmlFor="position">Position:</label><br/>
+                <input
+                onChange={this.handleChange}
+                name="position"
+                type="text"
+                id="position"
+                placeholder=""
+                value={this.state.position}
+                >
+                </input>
+
+                <label htmlFor="nickname">Nickname:</label><br/>
+                <input
+                onChange={this.handleChange}
+                name="nickname"
+                type="text"
+                id="nickname"
+                placeholder=""
+                value={this.state.nickname}
+                >
+                </input>
+
+                <label htmlFor="description">Description:</label><br/>
+                <input
+                onChange={this.handleChange}
+                name="description"
+                type="text"
+                id="position"
+                placeholder=""
+                value={this.state.description}
+                >
+                </input>
                 </div>
+
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
                 <button>Submit Smurf</button>
@@ -18,7 +77,12 @@ class AddForm extends React.Component {
     }
 }
 
-export default AddForm;
+const mapStateToProps = (state) =>({
+    smurfs: state
+
+})
+
+export default connect (mapStateToProps,{postSmurf})(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.

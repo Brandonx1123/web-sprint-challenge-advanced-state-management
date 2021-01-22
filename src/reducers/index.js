@@ -1,12 +1,53 @@
+import { FETCH_SMURF_DATA_FAILURE, 
+    FETCH_SMURF_DATA_START, 
+    FETCH_SMURF_DATA_SUCCESS,
+    FETCH_SMURF_DATA_ADD } from "../actions";
 
 export const initialState = {
+    smurfs: [],
+    isLoading: false,
+    error:''
 }
 
-const reducer = ()=>{
+export const reducer = (state=initialState, action)=>{
+    switch(action.type){
+        case FETCH_SMURF_DATA_START:
+            return{
+                ...state,
+                isLoading:true,
+                smurfs:action.payload,
+                error:''
+            }
+        case FETCH_SMURF_DATA_SUCCESS:
+            return{
+                ...state,
+                isLoading:false,
+                smurfs: action.payload,
+            }
+        case FETCH_SMURF_DATA_FAILURE:
+            return{
+                ...state,
+                isLoading:false,
+                error: action.payload
+            }
+        case FETCH_SMURF_DATA_ADD:
+            const newSmurf = {
+                name:'',
+                 position:'',
+                 nickname: '',
+                 description:''
+            }
+            return{
+                ...state,
+                isloading:false,
+                smurfs:[...state.smurfs, newSmurf]
+            }
+            default: return(state)       
+    }
+    
 }
 
 export default reducer;
-
 //Task List:
 //1. Add in the initialState needed to hold: 
 //      - an array of smurfs

@@ -1,13 +1,22 @@
 import React from 'react';
 
+
+
 class Smurf extends React.Component {
-    render() {
-        const { smurf } = this.props;
+        render() {
+        const {smurf} = this.props;
 
         return(<div data-testid="smurf" className="card">
+                <h2>Name: {smurf.name}</h2>
+                <h2>Position:{smurf.position}</h2>
+                <h2>Height: {smurf.height}</h2>
+                <h2>Description:{smurf.description}</h2>
         </div>);
     }
 }
+
+
+    
 
 export default Smurf;
 
@@ -16,3 +25,13 @@ export default Smurf;
 //2. Display the name, position, nickname and description of the provided smurf as needed.
 //3. Style as needed. (feel free to make use of the bootstrap card structure: https://getbootstrap.com/docs/4.0/components/card/)
 //4. DO NOT DELETE THE data-testid FIELD! It is used for sprint grading.
+
+
+
+// const mapStateToProps =(state) => {
+//     return{
+//         smurfs: state.smurfs,
+//         isLoading: state.isLoading,
+//         error: state.error
+//     }
+// }
