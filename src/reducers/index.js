@@ -32,7 +32,7 @@ export const reducer = (state=initialState, action)=>{
             }
         case FETCH_SMURF_DATA_ADD:
             const newSmurf = {
-                name:'',
+                 name:'',
                  position:'',
                  nickname: '',
                  description:''

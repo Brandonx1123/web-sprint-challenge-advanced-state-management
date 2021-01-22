@@ -21,8 +21,12 @@ handleChange = e => {
 }
 handleSubmit = e => {
     e.preventDefault()
-   this.props.postSmurf()
+    const newSmurf =this.state
+   this.props.postSmurf(newSmurf)
+   this.setState(this.state)
 }
+
+
     render() {
         return(<section>
             <h2>Add Smurf</h2>
@@ -70,7 +74,7 @@ handleSubmit = e => {
                 </div>
 
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
+                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error:{this.props.error} </div>
                 <button>Submit Smurf</button>
             </form>
         </section>);
@@ -78,8 +82,8 @@ handleSubmit = e => {
 }
 
 const mapStateToProps = (state) =>({
-    smurfs: state
-
+    
+    error:state.error
 })
 
 export default connect (mapStateToProps,{postSmurf})(AddForm);

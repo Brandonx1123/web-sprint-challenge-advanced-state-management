@@ -7,10 +7,10 @@ class Smurf extends React.Component {
         const {smurf} = this.props;
 
         return(<div data-testid="smurf" className="card">
-                <h2>Name: {smurf.name}</h2>
-                <h2>Position:{smurf.position}</h2>
-                <h2>Height: {smurf.height}</h2>
-                <h2>Description:{smurf.description}</h2>
+                <h2 className='card-name'>Name: {smurf.name}</h2>
+                <h2 className='card-position'>Position:{smurf.position}</h2>
+                <h2 className='card-height'>Height: {smurf.height}</h2>
+                <h2 className='card-description'>Description:{smurf.description}</h2>
         </div>);
     }
 }
