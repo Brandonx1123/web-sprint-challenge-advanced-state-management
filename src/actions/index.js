@@ -1,5 +1,5 @@
 import axios from 'axios';
-import SmurfDisplay from '../components/SmurfDisplay';
+
 export const FETCH_SMURF_DATA_START = 'FETCH_SMURF_DATA_START'
 export const FETCH_SMURF_DATA_SUCCESS = 'FETCH_SMURF_DATA_SUCCESS '
 export const FETCH_SMURF_DATA_FAILURE='FETCH_SMURF_DATA_FAILURE'
@@ -23,6 +23,7 @@ export const postSmurf = (newSmurf) => dispatch => {
     axios.post('http:localhost:3333/smurfs', newSmurf)
     .then((res) => {
         console.log('NEW SMURF', res)
+        fetchSmurf()
         dispatch({type:FETCH_SMURF_DATA_ADD, payload: res.data})
     })
     .catch((err) => {
@@ -30,6 +31,12 @@ export const postSmurf = (newSmurf) => dispatch => {
         dispatch({type: FETCH_SMURF_DATA_FAILURE, payload:err})
     })
 }
+
+
+
+
+
+
 
 //Task List:
 //1. Add fetch smurfs action: 

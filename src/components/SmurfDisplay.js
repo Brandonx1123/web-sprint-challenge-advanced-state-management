@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import {fetchSmurf} from '../actions/index'
 import Smurf from './Smurf'
@@ -6,20 +6,17 @@ import Smurf from './Smurf'
 export class SmurfDisplay extends React.Component {
 
 componentDidMount() {
-    this.props.fetchSmurf()
+    this.props.fetchSmurf() 
 }
 
     render() {
         return(
+            
         <div className='smurf-shown'>
-            {this.props.smurfs((newSmurf) => (
-                <Smurf key={newSmurf.id} newSmurf={newSmurf} />
-        ))}
+            {this.props.smurfs.map((smurf) => ( <Smurf key={smurf.id} smurf={smurf} />))}
         </div>
         )
-
     }
-    
 }
 
 const mapStateToProps = state =>{
@@ -27,10 +24,10 @@ const mapStateToProps = state =>{
         smurfs: state.smurfs,
         isLoading:state.isLoading,
         error:state.error
-    }
-}
+    };
+};
 
-export default connect(mapStateToProps,{fetchSmurf})(SmurfDisplay);
+export default connect(mapStateToProps, {fetchSmurf})(SmurfDisplay);
 
 //Task List:
 //1. Import in all needed components and library methods.
