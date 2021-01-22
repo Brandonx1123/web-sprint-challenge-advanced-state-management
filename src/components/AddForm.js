@@ -21,7 +21,7 @@ handleChange = e => {
 }
 handleSubmit = e => {
     e.preventDefault()
-   this.props.postSmurf(this.state.name)
+   this.props.postSmurf()
 }
     render() {
         return(<section>
