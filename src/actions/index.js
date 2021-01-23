@@ -1,34 +1,41 @@
 import axios from 'axios';
 
 export const FETCH_SMURF_DATA_START = 'FETCH_SMURF_DATA_START'
-export const FETCH_SMURF_DATA_SUCCESS = 'FETCH_SMURF_DATA_SUCCESS '
+export const FETCH_SMURF_DATA_SUCCESS = 'FETCH_SMURF_DATA_SUCCESS'
 export const FETCH_SMURF_DATA_FAILURE='FETCH_SMURF_DATA_FAILURE'
-export const FETCH_SMURF_DATA_ADD='FETCH_SMURF_DATA_ADD'    
+export const FETCH_SMURF_DATA_ADD='FETCH_SMURF_DATA_ADD' 
+
+//POST UNDER, FETCH(GET) ABOVE
+
+export const POST_SMURF_DATA_START='POST_SMURF_DATA_START'  
+export const POST_SMURF_DATA_SUCCESS='POST_SMURF_DATA_SUCEESS'  
+export const POST_SMURF_DATA_FAILURE='POST_SMURF_DATA_FAILURE'
+
 
 export const fetchSmurf = () => dispatch => {
     dispatch({type:FETCH_SMURF_DATA_START})
-    axios.get('http:localhost:3333/smurfs')
+    axios.get('http://localhost:3333/smurfs')
     .then((res) =>{
         console.log("smurfData", res)
         dispatch({type:FETCH_SMURF_DATA_SUCCESS, payload: res.data})
     })
     .catch ((err) => {
         console.log("Smurfs are in Trouble..HELP", err) 
-        dispatch({type: FETCH_SMURF_DATA_FAILURE, payload:err})
+        dispatch({type: FETCH_SMURF_DATA_FAILURE, payload:err.message})
     })
 }
 
+
 export const postSmurf = (newSmurf) => dispatch => {
-    dispatch({type:FETCH_SMURF_DATA_START})
-    axios.post('http:localhost:3333/smurfs', newSmurf)
+    dispatch({type:POST_SMURF_DATA_START})
+    axios.post('http://localhost:3333/smurfs', newSmurf)
     .then((res) => {
         console.log('NEW SMURF', res)
-        fetchSmurf()
-        dispatch({type:FETCH_SMURF_DATA_ADD, payload: res.data})
+        dispatch({type:POST_SMURF_DATA_SUCCESS, payload: res.data})
     })
     .catch((err) => {
-        console.log('Smurf Got into accident')
-        dispatch({type: FETCH_SMURF_DATA_FAILURE, payload:err})
+        console.log('New Smurf Got into accident')
+        dispatch({type: POST_SMURF_DATA_FAILURE, payload:err.message})
     })
 }
 

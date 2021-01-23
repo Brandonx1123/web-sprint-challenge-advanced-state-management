@@ -5,6 +5,7 @@ import {postSmurf} from "../actions/index"
 class AddForm extends React.Component {
 
     state = {
+        id:'',
         name:'',
         position:'',
         nickname:'',
@@ -12,18 +13,24 @@ class AddForm extends React.Component {
     }
 handleChange = e => {
         this.setState({
-            [e.target.name]:e.target.value
-        // name:e.target.value,
-        // position:e.target.value,
-        // nickname:e.target.value,
-        // description:e.target.value
-    })
+            [e.target.name]:e.target.value,
+            [e.target.position]:e.target.value,
+            [e.target.height]:e.target.value,
+            [e.target.description]:e.target.value,
+        })
 }
+
 handleSubmit = e => {
     e.preventDefault()
     const newSmurf =this.state
    this.props.postSmurf(newSmurf)
-   this.setState(this.state)
+   this.setState({
+        id:'',
+        name:'',
+        position:'',
+        nickname:'',
+        description:''
+    })
 }
 
 
@@ -36,7 +43,7 @@ handleSubmit = e => {
                     <input onChange={this.handleChange} 
                     name="name" 
                     id="name" 
-                    value={this.state.name}
+                    value={this.name}
                     placeholder=""
                     />
                 <label htmlFor="position">Position:</label><br/>
@@ -46,7 +53,7 @@ handleSubmit = e => {
                 type="text"
                 id="position"
                 placeholder=""
-                value={this.state.position}
+                value={this.position}
                 >
                 </input>
 
@@ -57,7 +64,7 @@ handleSubmit = e => {
                 type="text"
                 id="nickname"
                 placeholder=""
-                value={this.state.nickname}
+                value={this.nickname}
                 >
                 </input>
 
@@ -68,22 +75,23 @@ handleSubmit = e => {
                 type="text"
                 id="position"
                 placeholder=""
-                value={this.state.description}
+                value={this.description}
                 >
                 </input>
                 </div>
 
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error:{this.props.error} </div>
-                <button>Submit Smurf</button>
+                <button type='submit'>Submit Smurf</button>
             </form>
         </section>);
     }
 }
 
 const mapStateToProps = (state) =>({
-    
-    error:state.error
+    smurfs:state.smurfs,
+    error:state.error,
+    isLoading:state.isLoading
 })
 
 export default connect (mapStateToProps,{postSmurf})(AddForm);

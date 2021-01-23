@@ -6,18 +6,21 @@ import Smurf from './Smurf'
 export class SmurfDisplay extends React.Component {
 
 componentDidMount() {
-    this.props.fetchSmurf() 
+    this.props.fetchSmurf()
 }
 
     render() {
         return(
-            
+
         <div className='smurf-shown'>
-            {this.props.smurfs.map((smurf) => ( <Smurf key={smurf.id} smurf={smurf} />))}
+            {this.props.smurfs.map(smurf => {
+                return <Smurf key={smurf.id} smurf={smurf} />
+            })}
         </div>
         )
+        }
     }
-}
+
 
 const mapStateToProps = state =>{
     return{

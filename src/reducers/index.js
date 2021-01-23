@@ -1,7 +1,9 @@
 import { FETCH_SMURF_DATA_FAILURE, 
          FETCH_SMURF_DATA_START, 
-         FETCH_SMURF_DATA_SUCCESS,
-         FETCH_SMURF_DATA_ADD } from "../actions";
+         FETCH_SMURF_DATA_SUCCESS, 
+         POST_SMURF_DATA_SUCCESS,
+         POST_SMURF_DATA_START,
+         POST_SMURF_DATA_FAILURE} from "../actions";
 
 export const initialState = {
     smurfs: [],
@@ -15,9 +17,7 @@ export const reducer = (state=initialState, action)=>{
             return{
                 ...state,
                 isLoading:true,
-                smurfs:action.payload,
-               
-            }
+                }
         case FETCH_SMURF_DATA_SUCCESS:
             return{
                 ...state,
@@ -30,18 +30,23 @@ export const reducer = (state=initialState, action)=>{
                 isLoading:false,
                 error: action.payload
             }
-        case FETCH_SMURF_DATA_ADD:
-            const newSmurf = {
-                 name:'',
-                 position:'',
-                 nickname: '',
-                 description:''
+            case POST_SMURF_DATA_START:
+            return{
+                ...state,
+                isLoading: true
             }
+            case POST_SMURF_DATA_SUCCESS:
             return{
                 ...state,
                 isloading:false,
-                smurfs:[...state.smurfs, newSmurf]
+                smurfs:action.payload
             }
+        
+            case POST_SMURF_DATA_FAILURE:
+                return{
+                    ...state,
+                    error: action.payload
+                }
             default: return(state)       
     }
     
